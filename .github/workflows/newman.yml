@@ -1,30 +1,35 @@
 name: Newman API Tests
-'on':
+
+on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
+
 jobs:
   run-postman-tests:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - name: Install Newman
-        run: npm install -g newman newman-reporter-htmlextra
+
+      - name: Install dependencies
+        run: npm install
+
       - name: Run Postman Collection
-        run: >
-          npx newman run ".\collections\User Flow Automation.postman_collection.json" `
-          -e ".\environments\MiniEnvironment.postman_environment.json" `
-          -r htmlextra `
-          --reporter-htmlextra-export ".\reports\report.html"
-      - name: Upload Report
+        run: |
+          npx newman run "collections/User Flow Automation.postman_collection.json" \
+          -e "environments/MiniEnvironment.postman_environment.json" \
+          -r cli,htmlextra \
+          --reporter-htmlextra-export reports/report.html
+
+      - name: Upload Newman HTML Report
         uses: actions/upload-artifact@v4
         with:
           name: newman-report
