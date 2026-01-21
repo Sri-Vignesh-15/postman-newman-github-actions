@@ -38,7 +38,7 @@ postman-newman-ci/
 npm install
 
 ## Run Tests Locally
-npm test
+npm run test-API
 
 This will run the Postman collection using Newman, display execution results in the terminal, and generate an HTML report inside the reports folder.
 
@@ -53,8 +53,8 @@ This project uses GitHub Actions to automatically execute API tests on every pus
 
 ## npm Test Script Used
 "scripts": {
-  "test": "newman run \"collections/User Flow Automation.postman_collection.json\" -e \"environments/MiniEnvironment.postman_environment.json\" -r cli,htmlextra --reporter-htmlextra-export reports/report.html"
-}
+    "test-API": "npx newman run \"collections/User Flow Automation.postman_collection.json\" -e \"environments/MiniEnvironment.postman_environment.json\" -r cli,htmlextra --reporter-htmlextra-export reports/report.html"
+  }
 
 ## Author
 Sri Vignesh Natarajan
