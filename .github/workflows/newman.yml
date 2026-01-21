@@ -20,13 +20,9 @@ jobs:
         run: npm install -g newman newman-reporter-htmlextra
       - name: Run Postman Collection
         run: >
-          npx newman run ".\collections\User Flow
-          Automation.postman_collection.json" `
-
+          npx newman run ".\collections\User Flow Automation.postman_collection.json" `
           -e ".\environments\MiniEnvironment.postman_environment.json" `
-
           -r htmlextra `
-
           --reporter-htmlextra-export ".\reports\report.html"
       - name: Upload Report
         uses: actions/upload-artifact@v4
